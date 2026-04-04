@@ -229,6 +229,68 @@
 
         .custom-box-2 { top: 95px; right: 35px; width: 120px; height: 50px; background: linear-gradient(135deg, #1a0026, #ff2e88); border-color: var(--primary-light); }
         .custom-box-2 img { width: 60px; height: 60px; object-fit: contain; }
+        .popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.4s;
+    z-index: 200;
+}
+
+.popup-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.popup-box {
+    background: linear-gradient(135deg, #1a0026, #ff2e88);
+    padding: 25px;
+    border-radius: 20px;
+    width: 300px;
+    text-align: center;
+    color: white;
+    transform: scale(0.7);
+    opacity: 0;
+    transition: 0.4s;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+}
+
+.popup-overlay.active .popup-box {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.steps {
+    margin: 15px 0;
+    text-align: left;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.close-btn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background: white;
+    color: black;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close-btn:hover {
+    transform: scale(1.1);
+}
     </style>
 </head>
 
@@ -250,7 +312,25 @@
         <div class="glow"></div>
         
         <div class="player-card">
-            <div class="now-playing-label" style="text-align:center; color:var(--primary); font-size:10px; letter-spacing:2px; margin-bottom:15px;">STREAMING LIVE</div>
+            <div style="text-align:center; margin-bottom:15px;">
+                <button onclick="openInstallPopup()" 
+                style="
+                    background: linear-gradient(135deg, #ff2e88, #6a00ff);
+                    border: none;
+                    padding: 10px 20px;
+                    border-radius: 25px;
+                    color: white;
+                    font-weight: bold;
+                    cursor: pointer;
+                    box-shadow: 0 5px 20px rgba(255, 0, 150, 0.4);
+                    transition: 0.3s;
+                "
+                onmouseover="this.style.transform='scale(1.1)'"
+                onmouseout="this.style.transform='scale(1)'"
+                >
+                    📲 Install App
+                </button>
+            </div>
             
             <iframe 
     id="player"
@@ -276,7 +356,21 @@
     <div class="custom-box custom-box-2">
         <img src="dim.png" alt="logo">
     </div>
-
+    <div id="installPopup" class="popup-overlay">
+        <div class="popup-box">
+            <h2>📲 Install Musify Pro</h2>
+            <p>Follow these steps:</p>
+    
+            <div class="steps">
+                <div>1️. Open this in <b>Chrome</b></div>
+                <div>2️. Tap <b>⋮ (3 dots)</b> top right</div>
+                <div>3️. Click <b>Add to Home Screen</b></div>
+                <div>4️. Tap <b>Install App</b></div>
+            </div>
+    
+            <button onclick="closeInstallPopup()" class="close-btn">Got it 👍</button>
+        </div>
+    </div>
     <script src="https://w.soundcloud.com/player/api.js"></script>
     <script>
         const playlists = [
@@ -355,6 +449,13 @@
             const filtered = playlists.filter(p => p.name.toLowerCase().includes(q.toLowerCase()));
             render(filtered);
         }
+        function openInstallPopup() {
+    document.getElementById("installPopup").classList.add("active");
+}
+
+function closeInstallPopup() {
+    document.getElementById("installPopup").classList.remove("active");
+}
 
         function togglePlay() {
     if(widget) {
