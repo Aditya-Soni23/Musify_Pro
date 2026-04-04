@@ -15,7 +15,7 @@
         "purpose": "any maskable"
       }
     ],
-    "start_url": "./index.html",
+    "start_url": "https://aditya-soni23.github.io/Musify_Pro/",
     "display": "standalone",
     "orientation": "portrait",
     "background_color": "#0a0a0f",
