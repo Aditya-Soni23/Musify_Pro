@@ -15,12 +15,12 @@
         "purpose": "any maskable"
       }
     ],
-    "start_url": "https://aditya-soni23.github.io/Musify_Pro/",
+    "start_url": "https://aditya-soni23.github.io/Musify_Pro/index.html",
     "display": "standalone",
     "orientation": "portrait",
     "background_color": "#0a0a0f",
     "theme_color": "#ff5500",
-    "scope": "https://aditya-soni23.github.io/Musify_Pro/",
+    "scope": "https://aditya-soni23.github.io/Musify_Pro/index.html",
     "lang": "en-US",
     "categories": ["music", "entertainment"]
   }
