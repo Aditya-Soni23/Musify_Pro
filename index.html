@@ -339,22 +339,30 @@
     <main class="main-content">
         <div class="glow"></div>
         <button onclick="openInstallPopup()" 
-        style="
-            background: linear-gradient(135deg, #ff2e88, #6a00ff);
-            border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(255, 0, 150, 0.4);
-            transition: 0.3s;
-        "
-        onmouseover="this.style.transform='scale(1.1)'"
-        onmouseout="this.style.transform='scale(1)'"
-        >
-            📲 Install App
-        </button>
+    style="
+        position: fixed;
+        top: 140px; /* Adjust this to move it UP or DOWN */
+        right: 25px; /* Adjust this to move it LEFT or RIGHT */
+        z-index: 2000; /* Keeps it above the sidebar and player */
+        background: linear-gradient(135deg, #ff2e88, #6a00ff);
+        height: 50px;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 50px; /* Pill shape looks more premium */
+        color: white;
+        font-weight: 800;
+        font-size: 14px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        cursor: pointer;
+        box-shadow: 0 10px 30px rgba(255, 0, 150, 0.5);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    "
+    onmouseover="this.style.transform='scale(1.1) translateY(-5px)'; this.style.boxShadow='0 15px 40px rgba(255, 0, 150, 0.7)';"
+    onmouseout="this.style.transform='scale(1) translateY(0)'; this.style.boxShadow='0 10px 30px rgba(255, 0, 150, 0.5)';"
+>
+    📲 Install App
+</button>
         <div class="player-card">
             <div style="text-align:center; margin-bottom:15px;">
          
