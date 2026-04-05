@@ -178,21 +178,73 @@
             border-radius: 50%;
             transition: all 0.3s;
         }
+        #player {
+    width: 80% !important; /* Shrink width so the zoom doesn't cut it off */
+    height: 700px !important; /* Set a fixed height */
+    transform: scale(1.50); /* This makes EVERYTHING (fonts/rows) 25% bigger */
+    transform-origin: top center; /* Keeps it centered in your card */
+    margin-top: 20px;
+    border-radius: 15px;
+    filter: contrast(1.1); /* Makes the text pop more */
+}
 
-        .btn-ctrl:hover {
-            background: white;
-            color: black;
-            transform: rotate(10deg) scale(1.1);
-        }
+/* Adjust the player-card to handle the overflow from the zoom */
+.player-card {
+    overflow: hidden; /* Prevents the zoomed player from leaking out */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-        .btn-main {
-            width: 75px;
-            height: 75px;
-            background: var(--primary);
-            font-size: 28px;
-            border: none;
-            animation: float 3s infinite ease-in-out;
-        }
+ /* Base style for Black & Shiny Neon buttons */
+.btn-ctrl {
+    position: relative;
+    background: linear-gradient(145deg, #0f0f0f, #050505); /* Deep glossy black */
+    border: 1px solid rgba(255, 85, 0, 0.3); /* Subtle neon border */
+    color: var(--primary); /* Neon orange icon */
+    font-size: 22px;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    z-index: 1000; /* High priority to stay on top */
+    
+    /* The Glow Effect */
+    box-shadow: 0 0 15px rgba(255, 85, 0, 0.2), 
+                inset 0 0 10px rgba(255, 255, 255, 0.05);
+    
+    /* Shiny Glass Reflection */
+    backdrop-filter: blur(10px);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Bigger Main Play Button */
+.btn-main {
+    width: 85px;
+    height: 85px;
+    font-size: 32px;
+    background: #000;
+    border: 2px solid var(--primary);
+    box-shadow: 0 0 30px rgba(255, 85, 0, 0.5); /* Intense Glow */
+}
+
+/* Hover Animation: Shiny Pulse */
+.btn-ctrl:hover {
+    transform: scale(1.15) translateY(-5px);
+    color: #fff;
+    border-color: #fff;
+    box-shadow: 0 0 40px rgba(255, 85, 0, 0.8), 
+                0 0 10px #fff; /* White core neon glow */
+    text-shadow: 0 0 10px var(--primary);
+}
+
+/* Active Click Effect */
+.btn-ctrl:active {
+    transform: scale(0.9);
+}
 
         @media (max-width: 768px) {
             body { flex-direction: column; }
@@ -204,31 +256,7 @@
             iframe { height: 640px; }
         }
 
-        .custom-box {
-            position: absolute;
-            bottom: 110px;
-            right: 35px;
-            z-index: 99;
-            width: 320px;
-            height: 50px;
-            resize: both; 
-            overflow: hidden;
-            background: var(--glass);
-            backdrop-filter: blur(15px);
-            border: 2px solid var(--primary);
-            border-radius: 15px;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: rgb(0, 0, 0);
-            font-weight: bold;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            animation: bounceIn 1s ease-out;
-        }
-
-        .custom-box-2 { top: 95px; right: 35px; width: 120px; height: 50px; background: linear-gradient(135deg, #1a0026, #ff2e88); border-color: var(--primary-light); }
-        .custom-box-2 img { width: 60px; height: 60px; object-fit: contain; }
+     
         .popup-overlay {
     position: fixed;
     top: 0;
@@ -310,26 +338,26 @@
 
     <main class="main-content">
         <div class="glow"></div>
-        
+        <button onclick="openInstallPopup()" 
+        style="
+            background: linear-gradient(135deg, #ff2e88, #6a00ff);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(255, 0, 150, 0.4);
+            transition: 0.3s;
+        "
+        onmouseover="this.style.transform='scale(1.1)'"
+        onmouseout="this.style.transform='scale(1)'"
+        >
+            📲 Install App
+        </button>
         <div class="player-card">
-            <div style="text-align:center; margin-bottom:15px;">Install the app to unlock all features!>>>
-                <button onclick="openInstallPopup()" 
-                style="
-                    background: linear-gradient(135deg, #ff2e88, #6a00ff);
-                    border: none;
-                    padding: 10px 20px;
-                    border-radius: 25px;
-                    color: white;
-                    font-weight: bold;
-                    cursor: pointer;
-                    box-shadow: 0 5px 20px rgba(255, 0, 150, 0.4);
-                    transition: 0.3s;
-                "
-                onmouseover="this.style.transform='scale(1.1)'"
-                onmouseout="this.style.transform='scale(1)'"
-                >
-                    📲 Install
-                </button>
+            <div style="text-align:center; margin-bottom:15px;">
+         
             </div>
             
             <iframe 
@@ -349,13 +377,7 @@
         </div>
     </main>
 
-    <div class="custom-box">
-        <span>Musify Pro +</span>
-    </div>
 
-    <div class="custom-box custom-box-2">
-        <img src="dim.png" alt="logo">
-    </div>
     <div id="installPopup" class="popup-overlay">
         <div class="popup-box">
             <h2>Install Musify Pro to use all features!</h2>
