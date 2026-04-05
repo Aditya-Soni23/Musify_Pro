@@ -319,6 +319,45 @@
 .close-btn:hover {
     transform: scale(1.1);
 }
+.premium-heading {
+    /* 1. POSITIONING CONTROL */
+    position: absolute; 
+    top: 30px;    /* Change this to move it UP or DOWN */
+    left: 53%;    /* Starts at the center */
+    transform: translateX(-50%); /* Perfectly centers it horizontally */
+    z-index: 1500; /* Ensures it stays above the player and sidebar */
+
+    /* 2. STYLE & SHINE */
+    font-size: 52px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    white-space: nowrap; /* Prevents it from breaking into two lines */
+    
+    /* Animated Gradient Background */
+    background: linear-gradient(
+        to right, 
+        #ff5500 20%, 
+        #ffffff 50%, 
+        #ff5500 80%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine-animation 3s linear infinite;
+    filter: drop-shadow(0 0 20px rgba(255, 85, 0, 0.5));
+}
+
+@keyframes shine-animation {
+    to { background-position: 200% center; }
+}
+/* Mobile Responsive adjustment */
+@media (max-width: 768px) {
+    .premium-heading {
+        font-size: 32px;
+        letter-spacing: 2px;
+    }
+}
     </style>
 </head>
 
@@ -335,9 +374,10 @@
         </div>
         <div id="playlistContainer"></div>
     </aside>
-
+    <h1 class="premium-heading">Musify Pro+</h1>
     <main class="main-content">
         <div class="glow"></div>
+        
         <button onclick="openInstallPopup()" 
     style="
         position: fixed;
@@ -364,6 +404,7 @@
     📲 Install App
 </button>
         <div class="player-card">
+            
             <div style="text-align:center; margin-bottom:15px;">
          
             </div>
@@ -388,7 +429,7 @@
 
     <div id="installPopup" class="popup-overlay">
         <div class="popup-box">
-            <h2>Install Musify Pro to use all features!</h2>
+            <h2>Install Musify Pro+</h2>
             <p>Follow these steps:</p>
     
             <div class="steps">
